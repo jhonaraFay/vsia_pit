@@ -17,6 +17,9 @@ COPY . .
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+# Install JS dependencies and build Vite assets
+RUN npm install && npm run bui
+
 # Set file permissions
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 
