@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: laravel-app
+    env: docker
+    plan: free
+    repo: https://github.com/jhonaraFay/vsia_pit
+    branch: main
+    dockerContext: .
+    dockerfilePath: ./Dockerfile
+    buildCommand: ""
+startCommand: php artisan serve --host=0.0.0.0 --port=8000
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromService:
+          type: pserv
+          name: hotel
+          property: host
+      - key: DB_PORT
+        value: "5432"
+      - key: DB_DATABASE
+        value: hotel_tnuk
+      - key: DB_USERNAME
+        value: hotel_tnuk_user
+      - key: DB_PASSWORD
+        value: iLUy5bJZP0QW1utXBg4F2zDjeRdgcGrq
